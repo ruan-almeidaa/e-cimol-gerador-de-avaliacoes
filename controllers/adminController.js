@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const TeacherModel = require("../models/TeacherModel");
+const AdminModel = require("../models/AdminModel");
 
 //========== rotas GET ==========
 
@@ -42,7 +43,12 @@ router.get("/admin/professores/editar/:id", (req, res) =>{
     }).catch(erro =>{
         res.redirect("/admin/professores");
     });
+});
+
+router.get("/admin/cadastrar", (req, res) =>{
+    res.render("admin/newAdm");
 })
+
 
 
 //========== rotas POST ==========
@@ -63,6 +69,7 @@ router.post("/admin/professores/cadastrando", (req,res) =>{
     }) 
 });
 
+//rota que a tela de edição chama, para editra um professor com base no seu id
 router.post("/admin/professores/editando", (req, res) =>{
     let idTeacher = req.body.idTeacher;
     let nameTeacher = req.body.name;
@@ -80,6 +87,7 @@ router.post("/admin/professores/editando", (req, res) =>{
     });
 });
 
+//rota que o botão de deletar chama
 router.post("/admin/professores/delete", (req,res) =>{
 
     let id = req.body.id;
@@ -98,6 +106,21 @@ router.post("/admin/professores/delete", (req,res) =>{
     }else{
         res.redirect("/admin/professores");
     }
+});
+
+//rota que a tela chama para cadastrar um administrador
+router.post("/admin/cadastrando", (req,res) =>{
+    let nameAdm = req.body.name;
+    let emailAdm = req.body.email;
+
+    AdminModel.create({
+        nameAdmin: nameAdm,
+        emailAdmin: emailAdm
+    }).then(() =>{
+        res.redirect("/admin");
+    }).catch(erro =>{
+       console.log(erro)
+    }) 
 });
 
 module.exports = router;

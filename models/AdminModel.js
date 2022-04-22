@@ -8,7 +8,7 @@ const AdminModel = connection.define('admins',{
         autoIncrement:true
     },
 
-    nomeAdmin:{
+    nameAdmin:{
         type: Sequelize.STRING,
         allowNull: false
     },
