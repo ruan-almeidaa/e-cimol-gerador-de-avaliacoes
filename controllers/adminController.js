@@ -14,7 +14,7 @@ router.get("/admin", (req,res) =>{
 //rota para tela onde lista todos os professores cadastrados
 router.get("/admin/professores", (req,res) =>{
     TeacherModel.findAll().then(teachers =>{
-       res.render("admin/teacher", {teachers:teachers}); 
+       res.render("admin/teacher/teacher", {teachers:teachers}); 
     }).catch(erro =>{
         res.redirect("/")
     });
@@ -23,7 +23,7 @@ router.get("/admin/professores", (req,res) =>{
 
 //rota para tela de cadastro de novos professores
 router.get("/admin/professores/cadastrar", (req,res) =>{
-    res.render("admin/newTeacher.ejs");
+    res.render("admin/teacher/newTeacher.ejs");
 })
 
 //rota para tela de edição de um professor
@@ -36,7 +36,7 @@ router.get("/admin/professores/editar/:id", (req, res) =>{
 
     TeacherModel.findByPk(idTeacher).then(teacher =>{
         if(teacher != undefined){
-            res.render("admin/editTeacher", {teacher: teacher});
+            res.render("admin/teacher/editTeacher", {teacher: teacher});
         }else{
             res.redirect("/admin/professores");
         }
@@ -47,9 +47,7 @@ router.get("/admin/professores/editar/:id", (req, res) =>{
 
 router.get("/admin/cadastrar", (req, res) =>{
     res.render("admin/newAdm");
-})
-
-
+});
 
 //========== rotas POST ==========
 

@@ -20,10 +20,11 @@ connection
         console.log(error);
     });
 
+//
+const classModel = require("./models/ClassModel");
 const adminController = require("./controllers/adminController");
 
 app.use("/",adminController);
-
 
 app.get("/", (req, res) =>{
     res.render("index");

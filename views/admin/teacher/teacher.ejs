@@ -1,0 +1,55 @@
+<%-include ('../../partials/header.ejs') %> 
+<body>
+    <%-include ('../../partials/homenavbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <h1>Professores</h1>
+        <a href="/admin/professores/cadastrar" class="btn btn-success">Cadastrar novo professor</a>
+        <hr>
+
+        <table class="table table-striped">
+            
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% teachers.forEach(teacher => { %>
+                    <tr>
+                        <td><%= teacher.nameTeacher %></td>
+                        <td><%= teacher.emailTeacher %></td>
+                        <td>
+                            <a href="/admin/professores/editar/<%= teacher.idTeacher %>" class="btn btn-warning">Editar</a>
+
+                            <form method="post" action="/admin/professores/delete" style="display: inline;" onsubmit="confirmDelete(event,this)">
+                            <input type="hidden" name="id" value="<%= teacher.idTeacher %>">
+                            <button class="btn btn-danger">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+
+            </tbody>
+            
+
+        </table>
+    </div>
+
+</body>
+
+<script>
+    function confirmDelete(event, form){
+        event.preventDefault();
+        let decision = confirm("Você deseja realmente deletar esse professor?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>
+
+</html>
