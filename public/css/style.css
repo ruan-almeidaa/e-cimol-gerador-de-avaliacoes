@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #eceff1;
+}
+
+#barra-navegacao{
+    background-color: #275FAF;
+}
+
+nav img{
+    margin-left: 5vh;
+    width: 12vh;
+}
+
+.centered {
+    margin: 0 auto !important;
+    float: none !important;
+
+}
+
+@media screen and (max-width: 720px) {
+
+}
+
