@@ -1,0 +1,28 @@
+<%-include ('../partials/header.ejs') %> 
+<body>
+    <%-include ('../partials/homenavbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Cadastro de professores!</h2>
+            </div>
+
+            <div class="card-body">
+                <br>
+                <form method="post" action="/admin/professores/cadastrando">
+                <input class="form-control"type="text" name="name" placeholder="Nome do professor" required>
+                <br>
+                <input class="form-control" type="email" name="email" id="" placeholder="E-mail do professor" required>
+                <br>
+                <button class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

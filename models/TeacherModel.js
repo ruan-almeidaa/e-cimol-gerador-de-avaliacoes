@@ -20,5 +20,5 @@ const TeacherModel = connection.define('teachers',{
 
 });
 
-TeacherModel.sync({force:true});
+TeacherModel.sync({force:false});
 module.exports = TeacherModel;

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const connection = require('./database/database');
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 //definindo EJS como minha view engine
 app.set('view engine','ejs');
@@ -17,6 +19,11 @@ connection
     .catch((error) => {
         console.log(error);
     });
+
+const adminController = require("./controllers/adminController");
+
+app.use("/",adminController);
+
 
 app.get("/", (req, res) =>{
     res.render("index");

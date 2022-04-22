@@ -1,6 +1,34 @@
-<%-include ('partials/header.ejs') %>
+<%-include ('../partials/header.ejs') %> 
 <body>
-    <%-include ('partials/homenavbar.ejs') %>
+    <%-include ('../partials/homenavbar.ejs') %>
+
+    <div class="container mt-5">
+
+        <div class="row centered ">
+            <div class="cards col-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h4 class="card-title">Professores</h4>
+                      <p class="card-text">Cadastre, edite e exclua contas de professores.</p>
+                      <a class="btn btn-success"href="/admin/professores">Acessar!</a>
+                    </div>
+                  </div>
+            </div>
     
+            <div class="cards col-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h4 class="card-title">Administradores</h4>
+                      <p class="card-text">Cadastre novos administradores no Sistema.</p>
+                      <a class="btn btn-success"href="">Acessar!</a>
+                    </div>
+                  </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
 </body>
 </html>
