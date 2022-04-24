@@ -5,7 +5,7 @@
     <div class="container">
         <hr>
         <h1>Matérias</h1>
-        <a href="/admin/professores/cadastrar" class="btn btn-success">Cadastrar nova matéria</a>
+        <a href="/admin/materias/cadastrar" class="btn btn-success">Cadastrar nova matéria!</a>
         <hr>
 
         <table class="table table-striped">
@@ -19,15 +19,15 @@
             </thead>
 
             <tbody>
-                <% teachers.forEach(teacher => { %>
+                <% classes.forEach(clas => { %>
                     <tr>
-                        <td><%= teacher.nameTeacher %></td>
-                        <td><%= teacher.emailTeacher %></td>
+                        <td><%= clas.idClass %></td>
+                        <td><%= clas.titleClass %></td>
                         <td>
-                            <a href="/admin/professores/editar/<%= teacher.idTeacher %>" class="btn btn-warning">Editar</a>
+                            <a href="/admin/class/editar/<%= clas.idClass %>" class="btn btn-warning">Editar</a>
 
-                            <form method="post" action="/admin/professores/delete" style="display: inline;" onsubmit="confirmDelete(event,this)">
-                            <input type="hidden" name="id" value="<%= teacher.idTeacher %>">
+                            <form method="post" action="/admin/materias/delete" style="display: inline;" onsubmit="confirmDelete(event,this)">
+                            <input type="hidden" name="id" value="<%= clas.idClass%>">
                             <button class="btn btn-danger">Deletar</button>
                             </form>
                         </td>
@@ -45,7 +45,7 @@
 <script>
     function confirmDelete(event, form){
         event.preventDefault();
-        let decision = confirm("Você deseja realmente deletar esse professor?");
+        let decision = confirm("Você deseja realmente deletar essa matéria?");
         if(decision){
             form.submit();
         }

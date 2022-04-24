@@ -3,6 +3,7 @@ const router = express.Router();
 
 const TeacherModel = require("../models/TeacherModel");
 const AdminModel = require("../models/AdminModel");
+const ClassModel = require("../models/ClassModel");
 
 //========== rotas GET ==========
 
@@ -46,7 +47,25 @@ router.get("/admin/professores/editar/:id", (req, res) =>{
 });
 
 router.get("/admin/cadastrar", (req, res) =>{
-    res.render("admin/newAdm");
+    res.render("admin/adm/newAdm");
+});
+
+
+router.get("/admin/materias", (req, res) =>{
+    ClassModel.findAll().then(classes => {
+        
+        res.render("admin/class/index", {classes:classes});
+    }).catch(erro =>{
+        res.redirect("/admin/materias");
+    });
+});
+
+router.get("/admin/materias/cadastrar", (req, res) =>{
+    TeacherModel.findAll().then(teachers => {
+        res.render("admin/class/new", {teachers:teachers});
+    }).catch(erro =>{
+        res.redirect("/admin/materias");
+    });
 });
 
 //========== rotas POST ==========
