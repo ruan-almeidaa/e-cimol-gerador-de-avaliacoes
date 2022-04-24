@@ -1,0 +1,39 @@
+<%-include ('../../partials/header.ejs') %> 
+<body>
+    <%-include ('../../partials/homenavbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Edição de cadastro de matéria</h2>
+            </div>
+
+            <div class="card-body">
+                <br>
+                <form method="post" action="/admin/materias/editando">
+                <input class="form-control" value="<%= clas.titleClass %>"type="text" name="name" placeholder="Nome da matéria" required>
+                <br>
+                <label for="teacher">Professor</label>
+                <select class="form-control" name="teacher" id="teacher">
+                    <% teachers.forEach((teacher) => { %>
+                        <% if(teacher.idTeacher == clas.teacherIdTeacher){ %>
+                            <option value="<%= teacher.idTeacher %>" selected><%= teacher.nameTeacher %></option>
+                        <% } else { %>
+                            <option value="<%= teacher.idTeacher %>"><%= teacher.nameTeacher %></option>
+                        <% } %>
+                            
+                    <% }) %>
+                </select>
+                <br>
+                <input type="hidden" name="id" value="<%= clas.idClass %> ">
+                <button class="btn btn-success">Salvar</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

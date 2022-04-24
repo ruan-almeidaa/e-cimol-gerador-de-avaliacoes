@@ -53,8 +53,11 @@ router.get("/admin/cadastrar", (req, res) =>{
 
 router.get("/admin/materias", (req, res) =>{
     ClassModel.findAll().then(classes => {
-        
-        res.render("admin/class/index", {classes:classes});
+        TeacherModel.findAll().then(teachers =>{
+            res.render("admin/class/index", {classes:classes, teachers:teachers});
+        }).catch(erro =>{
+            res.redirect("admin/materias");
+        })    
     }).catch(erro =>{
         res.redirect("/admin/materias");
     });
@@ -66,6 +69,29 @@ router.get("/admin/materias/cadastrar", (req, res) =>{
     }).catch(erro =>{
         res.redirect("/admin/materias");
     });
+  
+});
+
+router.get("/admin/materias/editar/:id",(req,res) =>{
+    
+    let id = req.params.id;
+
+    ClassModel.findByPk(id).then(clas =>{
+
+        if(clas != undefined){
+            //preciso passar os professores para a view para exibir o dropdown
+            TeacherModel.findAll().then(teachers =>{
+                res.render("admin/class/edit", {clas:clas, teachers:teachers});
+            });
+            
+        }else{
+            res.redirect("/admin/materias");
+        }
+    }).catch(err => {
+        console.log(err);
+        res.redirect("/admin/materias");
+
+    })
 });
 
 //========== rotas POST ==========
@@ -138,6 +164,59 @@ router.post("/admin/cadastrando", (req,res) =>{
     }).catch(erro =>{
        console.log(erro)
     }) 
+});
+
+//rota que a tela chama para cadastrar um professor
+router.post("/admin/materias/cadastrando", (req,res) =>{
+    let nameClass = req.body.name;
+    let idTeacher = req.body.teacher;
+
+    ClassModel.create({
+        titleClass: nameClass,
+        teacherIdTeacher: idTeacher
+    }).then(() =>{
+        res.redirect("/admin/materias");
+    }).catch(erro =>{
+        res.redirect("/admin/materias");
+    }) 
+});
+
+router.post("/admin/materias/editando",(req,res) =>{
+    let id = req.body.id;
+    let name = req.body.name;
+    let teacher = req.body.teacher;
+
+    ClassModel.update({titleClass:name, teacherIdTeacher:teacher},{
+        where:{
+            idClass: id
+        }
+    }).then(() =>{
+        res.redirect("/admin/materias");
+    }).catch(err => {
+        console.log(err);
+        res.redirect("/admin/materias");
+    });
+});
+
+//rota que o botão de deletar chama
+router.post("/admin/materias/delete", (req,res) =>{
+
+    let id = req.body.id;
+
+    if(id != undefined && id != isNaN){
+
+        ClassModel.destroy({
+            where:{
+                idClass: id
+            }
+        }).then(() =>{
+            res.redirect("/admin/materias");
+        }).catch((error) => {
+            console.log(error);
+        });
+    }else{
+        res.redirect("/admin/materias");
+    }
 });
 
 module.exports = router;

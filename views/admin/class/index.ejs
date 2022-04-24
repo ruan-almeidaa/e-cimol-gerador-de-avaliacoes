@@ -21,10 +21,16 @@
             <tbody>
                 <% classes.forEach(clas => { %>
                     <tr>
-                        <td><%= clas.idClass %></td>
                         <td><%= clas.titleClass %></td>
+
+                        <% teachers.forEach(teacher => { %>
+                            <% if(teacher.idTeacher == clas.teacherIdTeacher) { %>
+                                <td><%= teacher.nameTeacher %></td>
+                        <%   } %>
+                        <% }) %>
+                        
                         <td>
-                            <a href="/admin/class/editar/<%= clas.idClass %>" class="btn btn-warning">Editar</a>
+                            <a href="/admin/materias/editar/<%= clas.idClass %>" class="btn btn-warning">Editar</a>
 
                             <form method="post" action="/admin/materias/delete" style="display: inline;" onsubmit="confirmDelete(event,this)">
                             <input type="hidden" name="id" value="<%= clas.idClass%>">
