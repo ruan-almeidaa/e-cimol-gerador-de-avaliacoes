@@ -20,5 +20,5 @@ const AdminModel = connection.define('admins',{
 
 });
 
-AdminModel.sync({force:true});
+AdminModel.sync({force:false});
 module.exports = AdminModel;

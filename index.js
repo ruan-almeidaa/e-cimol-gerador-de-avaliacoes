@@ -22,9 +22,14 @@ connection
 
 //
 const classModel = require("./models/ClassModel");
+const teacherModel = require("./models/TeacherModel");
+const categoryModel = require("./models/CategoryModel");
+
 const adminController = require("./controllers/adminController");
+const teacherController = require("./controllers/teacherController");
 
 app.use("/",adminController);
+app.use("/",teacherController);
 
 app.get("/", (req, res) =>{
     res.render("index");
