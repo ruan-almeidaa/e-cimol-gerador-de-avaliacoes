@@ -23,11 +23,17 @@
                     <tr>
                         <td><%= clas.titleClass %></td>
 
-                        <% teachers.forEach(teacher => { %>
-                            <% if(teacher.idTeacher == clas.teacherIdTeacher) { %>
-                                <td><%= teacher.nameTeacher %></td>
-                        <%   } %>
-                        <% }) %>
+                        <% if (clas.teacherIdTeacher != null) { %>
+                            <% teachers.forEach(teacher => { %>
+                                <% if (teacher.idTeacher == clas.teacherIdTeacher) { %>
+                                    <td><%= teacher.nameTeacher %></td>
+                                 <% } %>
+                            <% }) %>
+                         <% } else { %>
+                                    <td>-</td>
+                        <%}%>
+
+         
                         
                         <td>
                             <a href="/admin/materias/editar/<%= clas.idClass %>" class="btn btn-warning">Editar</a>

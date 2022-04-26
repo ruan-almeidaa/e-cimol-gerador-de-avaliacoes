@@ -24,6 +24,8 @@ connection
 const classModel = require("./models/ClassModel");
 const teacherModel = require("./models/TeacherModel");
 const categoryModel = require("./models/CategoryModel");
+const TitleQuestionModel = require("./models/TitleQuestionModel");
+const OptionQuestionModel = require("./models/OptionQuestionModel");
 
 const adminController = require("./controllers/adminController");
 const teacherController = require("./controllers/teacherController");
@@ -34,5 +36,6 @@ app.use("/",teacherController);
 app.get("/", (req, res) =>{
     res.render("index");
 })
+
 
 app.listen(process.env.PORT || 8080);

@@ -1,0 +1,111 @@
+<%-include ('../../partials/header.ejs') %> 
+<body>
+    <%-include ('../../partials/homenavbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Cadastro de perguntas!</h2>
+            </div>
+
+            <div class="card-body">
+                <br>
+                <form method="post"  action="/professor/perguntas/cadastrando">
+
+                    <div class="mb-3">
+
+                        <label for="class" class="form-label">Matéria</label>
+                        <select class="form-select" name="class" id="class">
+                            <% classes.forEach((clas) => { %>
+                                    <option value="<%= clas.idClass %>"><%= clas.titleClass %></option>        
+                            <% }) %>
+
+                        </select>
+
+                      </div>
+
+                      <div class="mb-3">
+
+                        <label for="category" class="form-label">Categoria (em breve)</label>
+                        <input class="form-control" type="text" value="Categoria" aria-label="readonly input example" readonly>
+
+                      </div>
+
+
+                      <div class="mb-3">
+                        <label for="bodyQuestion" class="form-label">Enunciado da pergunta</label>
+                        <textarea class="form-control" name="bodyQuestion" id="bodyQuestion" rows="3" required></textarea>
+                      </div>
+
+                      <label class="form-label">Opções de resposta:</label>
+                      <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                          <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        </svg>
+                        <div>
+                          Marque uma como opção correta para a pergunta.
+                        </div>
+                      </div>
+
+                      <div class="mb-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                  <input class="form-check-input mt-0" name="rightOption" type="radio" value="0" aria-label="Radio button for following text input" required>
+                                </div>
+                                <input type="text" name="option1" class="form-control" aria-label="Text input with radio button">
+                            </div>
+                      </div>
+
+                      <div class="mb-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                  <input class="form-check-input mt-0" name="rightOption" type="radio" value="1" aria-label="Radio button for following text input"required>
+                                </div>
+                                <input type="text" name="option2" class="form-control" aria-label="Text input with radio button">
+                            </div>
+                      </div>
+
+                      <div class="mb-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                  <input class="form-check-input mt-0" name="rightOption" type="radio" value="2" aria-label="Radio button for following text input"required>
+                                </div>
+                                <input type="text" name="option3" class="form-control" aria-label="Text input with radio button">
+                            </div>
+                      </div>
+
+                      <div class="mb-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                  <input class="form-check-input mt-0" name="rightOption" type="radio" value="3" aria-label="Radio button for following text input"required>
+                                </div>
+                                <input type="text" name="option4" class="form-control" aria-label="Text input with radio button">
+                            </div>
+                      </div>
+
+                      <div class="mb-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                  <input class="form-check-input mt-0" name="rightOption" type="radio" value="4" aria-label="Radio button for following text input"required>
+                                </div>
+                                <input type="text" name="option5" class="form-control" aria-label="Text input with radio button">
+                            </div>
+                      </div>
+
+                <button class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

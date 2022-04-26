@@ -16,7 +16,7 @@
                 <input class="form-control"type="text" name="name" placeholder="Nome da matéria" required>
                 <br>
                 <label for="teacher">Professor</label>
-                    <select class="form-control" name="teacher" id="teacher">
+                    <select class="form-select" name="teacher" id="teacher">
                         <% teachers.forEach((teacher) => { %>
                             <option value="<%= teacher.idTeacher %>"><%= teacher.nameTeacher %></option>
                         <% }) %>
