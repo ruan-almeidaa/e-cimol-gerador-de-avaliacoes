@@ -26,6 +26,8 @@ const teacherModel = require("./models/TeacherModel");
 const categoryModel = require("./models/CategoryModel");
 const TitleQuestionModel = require("./models/TitleQuestionModel");
 const OptionQuestionModel = require("./models/OptionQuestionModel");
+const TestModel = require("./models/TestModel");
+
 
 const adminController = require("./controllers/adminController");
 const teacherController = require("./controllers/teacherController");

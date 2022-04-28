@@ -26,7 +26,18 @@ router.get("/professor/perguntas", (req,res) =>{
     });
 });
 
+router.get("/professor/avaliacao", (req, res) =>{
+    res.render("teacher/test/index")
+});
 
+router.get("/professor/avaliacao/cadastrar", (req, res) =>{
+
+        //preciso passar os professores para a view para exibir o dropdown
+        ClassModel.findAll().then(classes =>{
+            res.render("teacher/test/new", {classes:classes, errNumberQuestions:false});
+        });
+    
+});
 
 router.post("/professor/perguntas/cadastrando", (req,res) =>{
     let clas = req.body.class;
@@ -62,6 +73,38 @@ router.post("/professor/perguntas/cadastrando", (req,res) =>{
     })
 
 });
+
+router.post("/professor/avaliacao/cadastrando", (req,res) =>{
+    let clas = req.body.class;
+    let numberQuestionsTest = req.body.numberQuestions;
+
+    TitlesQuestionModel.count({
+        where:{
+            classIdClass: clas
+        }
+    }).then(result =>{
+        if(result >= numberQuestionsTest){
+
+            var questionsTest = 0[0];
+
+            for(var i=0; i<=numberQuestionsTest; i++){
+                questionsTest = Math.floor(Math.random() * numberQuestionsTest)[i];
+            }
+
+            res.send(questionsTest);
+            
+/*             TestModel.create({
+                numberQuestionsTest: numberQuestionsTest,
+                classIdClass: clas
+            }) */
+        }else{
+        
+            ClassModel.findAll().then(classes =>{
+                res.render("teacher/test/new", {classes:classes, errNumberQuestions:true});
+            });
+        }
+    })
+})
 
 
 

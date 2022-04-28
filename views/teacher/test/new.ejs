@@ -1,0 +1,51 @@
+<%-include ('../../partials/header.ejs') %> 
+<body>
+    <%-include ('../../partials/homenavbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Cadastro de avaliações!</h2>
+            </div>
+
+            <div class="card-body">
+                <br>
+                <form method="post" action="/professor/avaliacao/cadastrando">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="numberQuestions" class="form-label">Número de questões</label>
+                            <input class="form-control"type="number" id="numberQuestions" name="numberQuestions" placeholder="Número de questões" required>
+                        </div>
+
+                        <div class="col-6">
+
+                            <label for="class" class="form-label">Matéria</label>
+                            <select class="form-select" name="class" id="class">
+                                <% classes.forEach((clas) => { %>
+                                        <option value="<%= clas.idClass %>"><%= clas.titleClass %></option>        
+                                <% }) %>
+    
+                            </select>
+                            
+                        </div>
+                    </div>
+
+                    <br>
+
+                <button class="btn btn-success">Cadastrar</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <% if (errNumberQuestions) { %>
+        <script>
+           alert("o número de perguntas disponíveis é menor do que o informado");   
+        </script>
+   <% } %>
+</body>
+</html>
