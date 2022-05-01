@@ -12,6 +12,10 @@ const TestModel = connection.define('tests',{
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement:false
+    },
+    questionsTest:{
+        type: Sequelize.STRING,
+        allowNull: false
     }
 
 });
@@ -21,5 +25,5 @@ TestModel.belongsTo(ClassModel); //uma avaliação só tem uma matéria
 
 
 
-TestModel.sync({force:false});
+TestModel.sync({force:true});
 module.exports = TestModel;

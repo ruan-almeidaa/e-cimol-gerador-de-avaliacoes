@@ -7,6 +7,7 @@ const ClassModel = require("../models/ClassModel");
 const TitlesQuestionModel = require("../models/TitleQuestionModel");
 const OptionQuestionModel = require("../models/OptionQuestionModel");
 const Sequelize = require ("sequelize");
+const TestModel = require("../models/TestModel");
 
 //========== rotas GET ==========
 
@@ -86,29 +87,56 @@ router.post("/professor/avaliacao/cadastrando", (req,res) =>{
     }).then(result =>{
 
         //valida se existe perguntas suficientes, se sim trazemos aleatóriamente
-        if(result > numberQuestionsTest){
+        if(result >= numberQuestionsTest){
 
-            TitlesQuestionModel.findAll({
-                attributes: ['idTitle'],
-                limit: numberQuestionsTest,
-                order: [
-                    [Sequelize.fn('RANDOM')]
-                ],
-                
-                where: {
-                    classIdClass: clas
-                }
-            }).then(allQuestions => {
-                res.send(allQuestions);
+            //valida se o número de perguntas existente no banco é o mesmo que foi informado. nesse caso não precisamos trazer aleatório.
+            if(result > numberQuestionsTest){
+
+                TitlesQuestionModel.findAll({
+                    attributes: ['idTitle'],
+                    limit: numberQuestionsTest,
+                    order: [
+                        [Sequelize.fn('RANDOM')]
+                    ],
+                    where: {
+                        classIdClass: clas
+                    }
+                }).then(allQuestionsObj => {
+
+                    const allQuestionsStr = JSON.stringify(allQuestionsObj);
+
+                })
+            
+            }else{
+
+                TitlesQuestionModel.findAll({
+                    attributes: ['idTitle'],
+                    where: {
+                        classIdClass: clas
+                    }
+                }).then(allQuestionsObj => {
+
+                    const allQuestionsStr = JSON.stringify(allQuestionsObj);
+
+                })
+
+            }
+            
+            TestModel.create({
+                numberQuestionsTest: numberQuestionsTest,
+                questionsTest: allQuestionsStr
             })
 
-        }
 
-        //valida se o número de perguntas existente no banco é o mesmo que foi informado. nesse caso não precisamos trazer aleatório.
-        else if(result == numberQuestionsTest){
-            
-        }
+            TestModel.findAll().then(tests =>{
 
+                res.render("teacher/test/index", {tests:tests});
+
+            })
+
+ 
+
+        }
         //se não tiver perguntas o suficiente, mostra a mensagem
         else{
             ClassModel.findAll().then(classes =>{
