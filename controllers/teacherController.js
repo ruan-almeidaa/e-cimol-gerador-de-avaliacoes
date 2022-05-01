@@ -6,6 +6,7 @@ const AdminModel = require("../models/AdminModel");
 const ClassModel = require("../models/ClassModel");
 const TitlesQuestionModel = require("../models/TitleQuestionModel");
 const OptionQuestionModel = require("../models/OptionQuestionModel");
+const Sequelize = require ("sequelize");
 
 //========== rotas GET ==========
 
@@ -83,22 +84,33 @@ router.post("/professor/avaliacao/cadastrando", (req,res) =>{
             classIdClass: clas
         }
     }).then(result =>{
-        if(result >= numberQuestionsTest){
 
-            var questionsTest = 0[0];
+        //valida se existe perguntas suficientes, se sim trazemos aleatóriamente
+        if(result > numberQuestionsTest){
 
-            for(var i=0; i<=numberQuestionsTest; i++){
-                questionsTest = Math.floor(Math.random() * numberQuestionsTest)[i];
-            }
+            TitlesQuestionModel.findAll({
+                attributes: ['idTitle'],
+                limit: numberQuestionsTest,
+                order: [
+                    [Sequelize.fn('RANDOM')]
+                ],
+                
+                where: {
+                    classIdClass: clas
+                }
+            }).then(allQuestions => {
+                res.send(allQuestions);
+            })
 
-            res.send(questionsTest);
+        }
+
+        //valida se o número de perguntas existente no banco é o mesmo que foi informado. nesse caso não precisamos trazer aleatório.
+        else if(result == numberQuestionsTest){
             
-/*             TestModel.create({
-                numberQuestionsTest: numberQuestionsTest,
-                classIdClass: clas
-            }) */
-        }else{
-        
+        }
+
+        //se não tiver perguntas o suficiente, mostra a mensagem
+        else{
             ClassModel.findAll().then(classes =>{
                 res.render("teacher/test/new", {classes:classes, errNumberQuestions:true});
             });
