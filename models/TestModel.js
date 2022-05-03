@@ -25,5 +25,5 @@ TestModel.belongsTo(ClassModel); //uma avaliação só tem uma matéria
 
 
 
-TestModel.sync({force:true});
+TestModel.sync({force:false});
 module.exports = TestModel;

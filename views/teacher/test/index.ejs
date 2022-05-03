@@ -20,6 +20,24 @@
 
             <tbody>
 
+                <% tests.forEach(test =>{ %>
+                    <tr>
+                        <% if (test.classIdClass != null) { %>
+                            <% classes.forEach(clas => { %>
+                                <% if (clas.idClass == test.classIdClass) { %>
+                                    <td><%= clas.titleClass %></td>
+                                 <% } %>
+                            <% }) %>
+                         <% } else { %>
+                                    <td>-</td>
+                        <%}%>
+
+                        <td><%= test.createdAt %></td>
+
+                        <td>teste</td>
+                    </tr>
+                <%} ) %>
+
             </tbody>
             
 

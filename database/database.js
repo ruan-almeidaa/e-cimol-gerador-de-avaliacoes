@@ -17,7 +17,7 @@ if (process.env.DATABASE_URL) {
     connection = new Sequelize('gerador_de_avaliacoes', 'postgres', 'postgres',{
         host:'localhost',
         dialect:'postgres',
-        timezone:"-03:00"
+        timezone:"-03:00",
     });
   }
 

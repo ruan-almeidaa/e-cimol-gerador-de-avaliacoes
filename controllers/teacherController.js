@@ -29,7 +29,14 @@ router.get("/professor/perguntas", (req,res) =>{
 });
 
 router.get("/professor/avaliacao", (req, res) =>{
-    res.render("teacher/test/index")
+    TestModel.findAll().then(tests =>{
+
+        console.log(tests);
+        ClassModel.findAll().then(classes =>{
+            res.render("teacher/test/index",{tests:tests, classes:classes});
+        })
+
+    })
 });
 
 router.get("/professor/avaliacao/cadastrar", (req, res) =>{
@@ -86,11 +93,8 @@ router.post("/professor/avaliacao/cadastrando", (req,res) =>{
         }
     }).then(result =>{
 
-        //valida se existe perguntas suficientes, se sim trazemos aleatóriamente
+        //valida se existe perguntas suficientes
         if(result >= numberQuestionsTest){
-
-            //valida se o número de perguntas existente no banco é o mesmo que foi informado. nesse caso não precisamos trazer aleatório.
-            if(result > numberQuestionsTest){
 
                 TitlesQuestionModel.findAll({
                     attributes: ['idTitle'],
@@ -105,36 +109,16 @@ router.post("/professor/avaliacao/cadastrando", (req,res) =>{
 
                     const allQuestionsStr = JSON.stringify(allQuestionsObj);
 
-                })
-            
-            }else{
-
-                TitlesQuestionModel.findAll({
-                    attributes: ['idTitle'],
-                    where: {
+                    TestModel.create({
+                        numberQuestionsTest: numberQuestionsTest,
+                        questionsTest: allQuestionsStr,
                         classIdClass: clas
-                    }
-                }).then(allQuestionsObj => {
+                    })
 
-                    const allQuestionsStr = JSON.stringify(allQuestionsObj);
+                    res.redirect("/");
 
                 })
-
-            }
             
-            TestModel.create({
-                numberQuestionsTest: numberQuestionsTest,
-                questionsTest: allQuestionsStr
-            })
-
-
-            TestModel.findAll().then(tests =>{
-
-                res.render("teacher/test/index", {tests:tests});
-
-            })
-
- 
 
         }
         //se não tiver perguntas o suficiente, mostra a mensagem
