@@ -14,7 +14,7 @@ const TestModel = connection.define('tests',{
         autoIncrement:false
     },
     questionsTest:{
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
     }
 

@@ -31,9 +31,11 @@ const TestModel = require("./models/TestModel");
 
 const adminController = require("./controllers/adminController");
 const teacherController = require("./controllers/teacherController");
+const studentController = require("./controllers/studentController");
 
 app.use("/",adminController);
 app.use("/",teacherController);
+app.use("/",studentController);
 
 app.get("/", (req, res) =>{
     res.render("index");

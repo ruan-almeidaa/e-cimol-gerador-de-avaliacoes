@@ -107,7 +107,14 @@ router.post("/professor/avaliacao/cadastrando", (req,res) =>{
                     }
                 }).then(allQuestionsObj => {
 
-                    const allQuestionsStr = JSON.stringify(allQuestionsObj);
+                    let allQuestionsArr=[];
+
+                    allQuestionsObj.forEach(question =>{
+                        allQuestionsArr.push(question.idTitle);
+                    });
+
+                    const allQuestionsStr = allQuestionsArr.toString();
+                    
 
                     TestModel.create({
                         numberQuestionsTest: numberQuestionsTest,
@@ -118,8 +125,6 @@ router.post("/professor/avaliacao/cadastrando", (req,res) =>{
                     res.redirect("/");
 
                 })
-            
-
         }
         //se não tiver perguntas o suficiente, mostra a mensagem
         else{
