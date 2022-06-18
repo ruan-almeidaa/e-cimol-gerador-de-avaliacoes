@@ -48,5 +48,5 @@ router.get("/aluno/avaliacao/:id",(req,res) =>{
 
     });
 
-})
+});
 module.exports = router;

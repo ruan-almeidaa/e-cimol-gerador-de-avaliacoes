@@ -4,46 +4,41 @@
 
     <div class="container">
         <hr>
-        <% titles.forEach(title => { %>
-            
-            <div class="card mb-5">
-                <div class="card-header">
-                    <h2>Questão ...</h2>
-                </div>
+        <form action="" method="post">
 
-                <div class="card-body">
-                    <input class="form-control" type="text" value="<%= title.bodyTitle%>" aria-label="readonly input example" readonly>
-                    <br>
+                <% titles.forEach(title => { %>
 
-                    <form action="" method="post">
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            <h5><%= title.bodyTitle %></h5>
+                        </div>
+        
+                        <div class="card-body">
+                            <% options.forEach(option => { %>
+                                <% if(option.TitlesQuestionIdTitle == title.idTitle) { %>
 
-                        <% options.forEach(option => { %>
-
-                            <% if(option.TitlesQuestionIdTitle == title.idTitle) { %>
-
-                                <div class="mb-3">
-
-                                    <div class="input-group mb-3">
-
-                                        <div class="input-group">
-                                            <div class="input-group-text">
-                                            <input class="form-check-input mt-0" name="rightOption" type="radio" value="0" aria-label="Radio button for following text input" required>
+                                    <div class="mb-3">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group">
+                                                <div class="input-group-text">
+                                                  <input class="form-check-input mt-0" name="<%= option.TitlesQuestionIdTitle %>" type="radio" value="0" aria-label="Radio button for following text input" required>
+                                                </div>
+                                                <input type="text" name="" class="form-control" value="<%= option.bodyOption %>">
                                             </div>
-                                            <input type="text" name="option1" class="form-control" aria-label="Text input with radio button" value="<%= option.bodyOption %>">
-                                        </div>
-                                </div>
-                                
-                            <% } %>
-                        <% }) %>
+                                      </div>
+                                    </div>
 
-                    </form>
+                                <% } %>
+                            <% }) %>
+                        </div>
+                    </div>
+                <% }) %>
 
-                        
-
+                <div class="d-grid gap-2 mb-5 mt-5">
+                    <button class="btn btn-success" type="button">Enviar avaliação!</button>
                 </div>
 
-            </div>
-        <% }) %>
+        </form>
 
     </div>
 </body>
