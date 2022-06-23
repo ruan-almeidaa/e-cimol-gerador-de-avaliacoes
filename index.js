@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const passport = require('passport');
-require('dotenv').config();
 const connection = require('./database/database');
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
