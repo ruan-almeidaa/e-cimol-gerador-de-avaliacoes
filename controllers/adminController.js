@@ -10,7 +10,7 @@ const ClassModel = require("../models/ClassModel");
 //rota para tela princpal do administrador
 router.get("/admin", (req,res) =>{
     res.render("admin/index");
-})
+});
 
 //rota para tela onde lista todos os professores cadastrados
 router.get("/admin/professores", (req,res) =>{
