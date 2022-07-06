@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const adminAuth = require("../middlewares/adminAuth");
+
 const TeacherModel = require("../models/TeacherModel");
 const AdminModel = require("../models/AdminModel");
 const ClassModel = require("../models/ClassModel");
@@ -8,7 +10,7 @@ const ClassModel = require("../models/ClassModel");
 //========== rotas GET ==========
 
 //rota para tela princpal do administrador
-router.get("/admin", (req,res) =>{
+router.get("/admin",(req,res) =>{
     res.render("admin/index");
 });
 
@@ -101,13 +103,13 @@ router.get("/admin/materias/editar/:id",(req,res) =>{
 router.post("/admin/professores/cadastrando", (req,res) =>{
     let nameTeacher = req.body.name;
     let emailTeacher = req.body.email;
-
     TeacherModel.create({
         nameTeacher: nameTeacher,
         emailTeacher: emailTeacher
     }).then(() =>{
         res.redirect("/admin/professores");
     }).catch(erro =>{
+        console.log(erro);
         res.redirect("/admin/professores");
     }) 
 });
@@ -155,7 +157,7 @@ router.post("/admin/professores/delete", (req,res) =>{
 router.post("/admin/cadastrando", (req,res) =>{
     let nameAdm = req.body.name;
     let emailAdm = req.body.email;
-
+    res.send("entrou na rota");
     AdminModel.create({
         nameAdmin: nameAdm,
         emailAdmin: emailAdm

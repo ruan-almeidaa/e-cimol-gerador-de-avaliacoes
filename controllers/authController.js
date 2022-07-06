@@ -26,7 +26,8 @@ router.get('/logar/callback',
     res.redirect('/success');
   });
 
-router.get('/success', (req, res) => res.send(userProfile));
+  router.get('/success', (req, res) => res.render("menu"));  
+//router.get('/success', (req, res) => res.send(userProfile.email));
 router.get('/error', (req, res) => res.send("error logging in"));
 
 module.exports = router;

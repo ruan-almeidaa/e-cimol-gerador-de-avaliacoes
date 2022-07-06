@@ -18,6 +18,11 @@ if (process.env.DATABASE_URL) {
         host:'localhost',
         dialect:'postgres',
         timezone:"-03:00",
+        define: {
+            timestamps: true,
+            underscored: true,
+            underscoredAll: true,
+          },
     });
   }
 
