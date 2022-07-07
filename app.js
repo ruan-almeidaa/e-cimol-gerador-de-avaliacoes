@@ -3,6 +3,7 @@ const app = express();
 const connection = require('./database/database');
 const session = require('express-session');
 const passport = require('passport');
+const isLogged = require("./middlewares/IsLogged");
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
@@ -57,9 +58,12 @@ app.use("/",adminController);
 app.use("/",teacherController);
 app.use("/",studentController);
 
+app.get("/",isLogged, (req, res) =>{
+ res.render("index");
+});
 
-app.get("/", (req, res) =>{
-    res.render("index");
+app.get("/menu",isLogged, (req, res) =>{
+  res.render("menu");
 });
 
 

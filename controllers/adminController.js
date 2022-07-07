@@ -10,12 +10,12 @@ const ClassModel = require("../models/ClassModel");
 //========== rotas GET ==========
 
 //rota para tela princpal do administrador
-router.get("/admin",(req,res) =>{
+router.get("/admin",adminAuth,(req,res) =>{
     res.render("admin/index");
 });
 
 //rota para tela onde lista todos os professores cadastrados
-router.get("/admin/professores", (req,res) =>{
+router.get("/admin/professores",adminAuth, (req,res) =>{
     TeacherModel.findAll().then(teachers =>{
        res.render("admin/teacher/teacher", {teachers:teachers}); 
     }).catch(erro =>{
@@ -25,12 +25,12 @@ router.get("/admin/professores", (req,res) =>{
 })
 
 //rota para tela de cadastro de novos professores
-router.get("/admin/professores/cadastrar", (req,res) =>{
+router.get("/admin/professores/cadastrar", adminAuth,(req,res) =>{
     res.render("admin/teacher/newTeacher.ejs");
 })
 
 //rota para tela de edição de um professor
-router.get("/admin/professores/editar/:id", (req, res) =>{
+router.get("/admin/professores/editar/:id", adminAuth,(req, res) =>{
     let idTeacher = req.params.id;
 
     if(isNaN(idTeacher)){
@@ -48,12 +48,12 @@ router.get("/admin/professores/editar/:id", (req, res) =>{
     });
 });
 
-router.get("/admin/cadastrar", (req, res) =>{
+router.get("/admin/cadastrar", adminAuth,(req, res) =>{
     res.render("admin/adm/newAdm");
 });
 
 
-router.get("/admin/materias", (req, res) =>{
+router.get("/admin/materias",adminAuth, (req, res) =>{
     ClassModel.findAll().then(classes => {
         TeacherModel.findAll().then(teachers =>{
             res.render("admin/class/index", {classes:classes, teachers:teachers});
@@ -65,7 +65,7 @@ router.get("/admin/materias", (req, res) =>{
     });
 });
 
-router.get("/admin/materias/cadastrar", (req, res) =>{
+router.get("/admin/materias/cadastrar",adminAuth, (req, res) =>{
     TeacherModel.findAll().then(teachers => {
         res.render("admin/class/new", {teachers:teachers});
     }).catch(erro =>{
@@ -74,7 +74,7 @@ router.get("/admin/materias/cadastrar", (req, res) =>{
   
 });
 
-router.get("/admin/materias/editar/:id",(req,res) =>{
+router.get("/admin/materias/editar/:id",adminAuth,(req,res) =>{
     
     let id = req.params.id;
 
@@ -100,7 +100,7 @@ router.get("/admin/materias/editar/:id",(req,res) =>{
 
 
 //rota que a tela chama para cadastrar um professor
-router.post("/admin/professores/cadastrando", (req,res) =>{
+router.post("/admin/professores/cadastrando", adminAuth,(req,res) =>{
     let nameTeacher = req.body.name;
     let emailTeacher = req.body.email;
     TeacherModel.create({
@@ -115,7 +115,7 @@ router.post("/admin/professores/cadastrando", (req,res) =>{
 });
 
 //rota que a tela de edição chama, para editra um professor com base no seu id
-router.post("/admin/professores/editando", (req, res) =>{
+router.post("/admin/professores/editando", adminAuth,(req, res) =>{
     let idTeacher = req.body.idTeacher;
     let nameTeacher = req.body.name;
     let emailTeacher = req.body.email;
@@ -133,7 +133,7 @@ router.post("/admin/professores/editando", (req, res) =>{
 });
 
 //rota que o botão de deletar chama
-router.post("/admin/professores/delete", (req,res) =>{
+router.post("/admin/professores/delete", adminAuth,(req,res) =>{
 
     let id = req.body.id;
 
@@ -154,10 +154,9 @@ router.post("/admin/professores/delete", (req,res) =>{
 });
 
 //rota que a tela chama para cadastrar um administrador
-router.post("/admin/cadastrando", (req,res) =>{
+router.post("/admin/cadastrando", adminAuth,(req,res) =>{
     let nameAdm = req.body.name;
     let emailAdm = req.body.email;
-    res.send("entrou na rota");
     AdminModel.create({
         nameAdmin: nameAdm,
         emailAdmin: emailAdm
@@ -169,7 +168,7 @@ router.post("/admin/cadastrando", (req,res) =>{
 });
 
 //rota que a tela chama para cadastrar um professor
-router.post("/admin/materias/cadastrando", (req,res) =>{
+router.post("/admin/materias/cadastrando",adminAuth, (req,res) =>{
     let nameClass = req.body.name;
     let idTeacher = req.body.teacher;
 
@@ -183,7 +182,7 @@ router.post("/admin/materias/cadastrando", (req,res) =>{
     }) 
 });
 
-router.post("/admin/materias/editando",(req,res) =>{
+router.post("/admin/materias/editando",adminAuth,(req,res) =>{
     let id = req.body.id;
     let name = req.body.name;
     let teacher = req.body.teacher;
@@ -201,7 +200,7 @@ router.post("/admin/materias/editando",(req,res) =>{
 });
 
 //rota que o botão de deletar chama
-router.post("/admin/materias/delete", (req,res) =>{
+router.post("/admin/materias/delete",adminAuth, (req,res) =>{
 
     let id = req.body.id;
 
