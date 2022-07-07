@@ -47,6 +47,7 @@ const TitleQuestionModel = require("./models/TitleQuestionModel");
 const OptionQuestionModel = require("./models/OptionQuestionModel");
 const TestModel = require("./models/TestModel");
 const categoryModel = require("./models/CategoryModel");
+const ResultsModel = require("./models/ResultsModel");
 
 const adminController = require("./controllers/adminController");
 const teacherController = require("./controllers/teacherController");
@@ -65,6 +66,5 @@ app.get("/",isLogged, (req, res) =>{
 app.get("/menu",isLogged, (req, res) =>{
   res.render("menu");
 });
-
 
 app.listen(process.env.PORT || 8080);

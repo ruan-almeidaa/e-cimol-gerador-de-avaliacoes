@@ -29,4 +29,13 @@ router.get('/logar/callback',
   router.get('/success', (req, res) => res.render("menu"));  
   router.get('/error', (req, res) => res.render("index"));
 
+router.get('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) {
+       return next(err);
+      }
+    res.redirect('/');
+  });
+});
+
 module.exports = router;

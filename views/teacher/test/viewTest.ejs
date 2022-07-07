@@ -6,19 +6,19 @@
 
         <br>
 
-        <div class="row">
-            <div class="col-6">
-                <label for="nameStudent">Nome do Aluno:</label>
-                <input type="text" class="form-control" name="nameStudent" id="nameStudent" required placeholder="Nome">
-            </div>
+        <form action="/aluno/avaliacao/enviando" method="post" onsubmit="getAnswers(event,this)">
 
-            <div class="col-6">
-                <label for="emailStudent">E-mail EDUCAR do Aluno:</label>
-                <input type="text" class="form-control" name="emailStudent" id="emailStudent" required placeholder="aluno@educar.rs.gov.br">
+            <div class="row">
+                <div class="col-6">
+                    <label for="nameStudent">Nome do Aluno:</label>
+                    <input type="text" class="form-control" name="nameStudent" id="nameStudent" required placeholder="Nome">
+                </div>
+    
+                <div class="col-6">
+                    <label for="emailStudent">E-mail EDUCAR do Aluno:</label>
+                    <input type="text" class="form-control" name="emailStudent" id="emailStudent" required placeholder="aluno@educar.rs.gov.br">
+                </div>
             </div>
-        </div>
-
-        <form action="" method="post">
 
                 <% titles.forEach(title => { %>
 
@@ -35,7 +35,7 @@
                                         <div class="input-group mb-3">
                                             <div class="input-group">
                                                 <div class="input-group-text">
-                                                  <input class="form-check-input mt-0" name="<%= option.TitlesQuestionIdTitle %>" type="radio" value="0" aria-label="Radio button for following text input" required>
+                                                  <input class="form-check-input mt-0" name="<%= option.TitlesQuestionIdTitle %>" type="radio" value="<%= option.idOption %>" aria-label="Radio button for following text input" required>
                                                 </div>
                                                 <input type="text" name="" class="form-control" value="<%= option.bodyOption %>" readonly>
                                             </div>
@@ -49,11 +49,28 @@
                 <% }) %>
 
                 <div class="d-grid gap-2 mb-5 mt-5">
-                    <button class="btn btn-success" type="button">Enviar avaliação!</button>
+                    <input type="hidden" id="allAnswers" name="allAnswers">
+                    <input type="hidden" name="idTest" value="<%= idTest %>">
+                    <button class="btn btn-success">Enviar avaliação!</button>
                 </div>
 
         </form>
 
     </div>
 </body>
+
+<script>
+    function getAnswers(event, form){
+    event.preventDefault();
+    let arrAnswers=[];
+
+    let answersInputs = document.querySelectorAll('input[type=radio]:checked');
+    answersInputs.forEach(answer => {
+        arrAnswers.push(answer.value);
+    });
+    document.getElementById('allAnswers').value = arrAnswers;
+    form.submit();
+}
+   
+</script>
 </html>

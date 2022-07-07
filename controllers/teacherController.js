@@ -122,7 +122,7 @@ router.post("/professor/avaliacao/cadastrando", (req,res) =>{
                         classIdClass: clas
                     })
 
-                    res.redirect("/");
+                    res.redirect("/menu");
 
                 })
         }

@@ -1,0 +1,41 @@
+<%-include ('../../partials/header.ejs') %> 
+<body>
+    <%-include ('../../partials/homenavbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <h1>Resultados</h1>
+        <hr>
+
+        <table class="table table-striped">
+            
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>E-mail</th>
+                    <th>Questões da prova</th>
+                    <th>Acertos</th>
+                    
+                </tr>
+            </thead>
+
+            <tbody>
+                <% results.forEach(result => { %>
+                    <tr>
+                        <td><%= result.nameStudentResult %></td>
+                        <td><%= result.emailStudentResult %></td>
+                        <td><%= result.numberOfQuestions %></td>
+                        <td><%= result.numberRightQuestions %></td>
+                    </tr>
+                <% }) %>
+
+            </tbody>
+            
+
+        </table>
+    </div>
+
+</body>
+
+
+</html>

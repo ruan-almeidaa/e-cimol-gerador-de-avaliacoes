@@ -34,7 +34,10 @@
 
                         <td><%= test.createdAt %></td>
 
-                        <td><a href="/aluno/avaliacao/<%= test.idTest %>" class="btn btn-warning">ver avaliação</a></td>
+                        <td>
+                            <a href="/aluno/avaliacao/<%= test.idTest %>" class="btn btn-warning">ver avaliação</a>
+                            <a href="/aluno/avaliacao/resultados/<%= test.idTest %>" class="btn btn-warning">resultados</a>
+                        </td>
                     </tr>
                 <%} ) %>
 
